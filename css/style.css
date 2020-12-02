@@ -7,3 +7,9 @@
     width: 40px;
     height: auto;
 }
+.star{
+  color: grey;
+}
+.yellow-star{
+  color: #ffbf00;
+}
