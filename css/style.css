@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.locandina img{
+.locandina .bandierina{
     width: 40px;
     height: auto;
 }

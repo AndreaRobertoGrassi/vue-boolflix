@@ -20,10 +20,11 @@
         <h1>FILM</h1>
 
         <div class="locandina" v-for="(film,i) in filmsArray">
+          <img :src="copertinaFilmsArray[i]" alt="">
           <h3>{{film.title}}</h3>
           <h3>{{film.original_title}}</h3>
           <h3>{{film.original_language}}</h3>
-          <img :src="bandieraFilmsArray[i]" @error="setAltImg" alt="">
+          <img class="bandierina" :src="bandieraFilmsArray[i]" @error="setAltImg" alt="">
           <h3>{{film.vote_average}}</h3>
           <div class="stars">
             <i class="fas fa-star yellow-star" v-for="star in film.vote_average"></i>
@@ -37,9 +38,10 @@
         <h1>SERIE TV</h1>
 
         <div class="locandina" v-for="(serieTv,i) in serieTvArray">
+          <img :src="copertinaSerieTvArray[i]" alt="">
           <h3>{{serieTv.original_name}}</h3>
           <h3>{{serieTv.original_language}}</h3>
-          <img :src="bandieraSerieTvArray[i]" @error="setAltImg" alt="">
+          <img class="bandierina" :src="bandieraSerieTvArray[i]" @error="setAltImg" alt="">
           <h3>{{serieTv.vote_average}}</h3>
           <div class="stars">
             <i class="fas fa-star yellow-star" v-for="star in serieTv.vote_average"></i>
