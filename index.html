@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <input @keydown.enter="ricerca" v-model="search" type="search">
+      </header>
+      <div class="locandina" v-for="(film,i) in filmsArray">
+        <h1>{{film.title}}</h1>
+        <h1>{{film.original_title}}</h1>
+        <img :src="bandieraArray[i]" @error="setAltImg" alt="">
+        <h1>{{film.original_language}}</h1>
+        <h1>{{film.vote_average}}</h1>
+      </div>
+    </div>
+
+
+    <!-- script -->
+    <script src="js/script.js" charset="utf-8"></script>
+  </body>
+</html>
