@@ -15,7 +15,7 @@
         <h1>BOOLFLIX</h1>
         <div class="input-search">
           <i class="fas fa-search icon-search"></i>
-          <input @keydown.enter="ricerca" class="search" v-model="search" type="search">
+          <input id="input" @keydown.enter="ricerca" v-model="search" type="search">
         </div>
       </header>
 

@@ -10,6 +10,11 @@ var app =new Vue({
     copertinaFilmsArray:[],   //copertine per film
     copertinaSerieTvArray:[]   //copertine per serie tv
   },
+  mounted:function () {
+    //focus automatico sull'input
+    document.getElementById('input').focus();
+  },
+
   methods:{
 
     //funzione di ricerca
@@ -50,6 +55,7 @@ var app =new Vue({
       });
     },
 
+    //funzione per copertina non disponibile
     setAltImgCopertina:function (event) {
       event.target.src='img/img-vuota.svg';
     },

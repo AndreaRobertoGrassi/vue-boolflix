@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 /* INTESTAZIONE */
 header{
   width: 100%;
@@ -22,7 +21,7 @@ header h1{
 header .input-search{
   position: relative;
 }
-header .search{
+header #input{
   width: 250px;
   height: 30px;
   border-radius: 7px;
@@ -61,7 +60,15 @@ main .locandina .copertina{
   height: 500px;
   width: 342px;
 }
+main .locandina .img-vuota{
+  width: 100px;
+  height: auto;
+}
+main .locandina:hover{
+  cursor: pointer;
+}
 main .locandina:hover .copertina{
+  transition: all .5s ease;
   opacity: 0.2;
   filter: brightness(30%);
 }
