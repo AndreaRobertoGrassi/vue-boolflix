@@ -3,13 +3,101 @@
   padding: 0;
   box-sizing: border-box;
 }
-.locandina .bandierina{
-    width: 40px;
+
+/* INTESTAZIONE */
+header{
+  width: 100%;
+  height: 80px;
+  background-color: #171515;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  position: fixed;
+  z-index: 2;
+}
+header h1{
+  color: red;
+}
+header .input-search{
+  position: relative;
+}
+header .search{
+  width: 250px;
+  height: 30px;
+  border-radius: 7px;
+  border: 0;
+  padding-left: 40px;
+  font-size: 16px;
+}
+header .icon-search{
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
+/* CORPO DELLA PAGINA */
+main{
+  background-color: grey;
+  height: 100vh;
+  padding: 100px 50px;
+  overflow: auto;
+}
+main section{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+main .locandina{
+  height: 500px;
+  width: 342px;
+  margin-bottom: 5px;
+  position: relative;
+}
+main .locandina .copertina{
+  height: 500px;
+  width: 342px;
+}
+main .locandina:hover .copertina{
+  opacity: 0.2;
+  filter: brightness(30%);
+}
+main .locandina .info{
+  display: none;
+}
+main .locandina:hover .info{
+  display: block;
+  width: 100%;
+  height: 100%;
+  top:0;
+  left: 0;
+  position: absolute;
+  color: white;
+  padding: 10px 15px;
+}
+main .info p{
+  margin: 20px 0;
+}
+main .lingua{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+main .lingua .bandierina{
+    width: 30px;
     height: auto;
+    margin-left: 15px;
 }
-.star{
-  color: grey;
+main .voto{
+  display: flex;
+  align-items: center;
 }
-.yellow-star{
+main .voto h3{
+  margin-right: 15px;
+}
+main .voto .yellow-star{
   color: #ffbf00;
 }

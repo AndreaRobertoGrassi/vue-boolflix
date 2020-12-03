@@ -2,7 +2,7 @@ var app =new Vue({
   el:'#app',
   data:{
     apiKey:'8f23d254d7ec1835913633d0b0a45c83',
-    search:'',
+    search:'',  //input di ricerca
     bandieraFilmsArray:[],  //bandiere per film
     bandieraSerieTvArray:[],  //bandiere per serietv
     filmsArray:[],    //films
@@ -28,31 +28,35 @@ var app =new Vue({
       });
     },
 
-    //funzione che riguardai film per inserire media voto in base 5, la copertina e la bandiera 
+    //funzione che riguarda i film per inserire media voto in base 5, la copertina e la bandiera
     fnFilmsArray:function () {
       this.bandieraFilmsArray=[];   //per le bandiere
       this.copertinaFilmsArray=[];   //per le copertine
       this.filmsArray.forEach(item => {
         item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
-        this.copertinaFilmsArray.push('https://image.tmdb.org/t/p/w154'+item.poster_path);  //inserisco l'immagine di copertina
+        this.copertinaFilmsArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
         this.bandieraFilmsArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
       });
     },
 
-    //funzione che riguardai film per inserire media voto in base 5, la copertina e la bandiera
+    //funzione che riguarda i film per inserire media voto in base 5, la copertina e la bandiera
     fnSerieTvArray:function () {
       this.bandieraSerieTvArray=[];   //array per le bandiere
       this.copertinaSerieTvArray=[];   //per le copertine
       this.serieTvArray.forEach(item => {
         item.vote_average=Math.ceil(item.vote_average/2);   //trasformo il voto in base 10, in base 5
-        this.copertinaSerieTvArray.push('https://image.tmdb.org/t/p/w154'+item.poster_path);   //inserisco l'immagine di copertina
+        this.copertinaSerieTvArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);   //inserisco l'immagine di copertina
         this.bandieraSerieTvArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
       });
     },
 
+    setAltImgCopertina:function (event) {
+      event.target.src='img/img-vuota.svg';
+    },
+
     //funzione per bandiera non europea
-    setAltImg:function (event) {
+    setAltImgBandiera:function (event) {
       event.target.src = "img/world.svg"
-    }
+    },
   }
 })
