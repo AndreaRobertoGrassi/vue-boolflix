@@ -7,7 +7,8 @@ var app =new Vue({
     ricercaArray:[],
     bandieraArray:[],
     copertinaArray:[],
-    castArray:[]
+    castArray:[],
+    imgVuota:'img-vuota'
   },
   mounted:function () {
     //focus automatico sull'input
@@ -54,17 +55,15 @@ var app =new Vue({
               }
             });
           }
-          console.log(this.castArray);
+
           item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
-
           this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
-
           this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
         });
       });
     },
 
-    //funzione per copertina non disponibile
+    // funzione per copertina non disponibile
     setAltImgCopertina:function (event) {
       event.target.src='img/img-vuota.svg';
     },

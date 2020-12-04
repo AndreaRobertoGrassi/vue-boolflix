@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background-color: #252525;
+}
 /* INTESTAZIONE */
 header{
   width: 100%;
@@ -38,12 +41,8 @@ header .icon-search{
 
 /* CORPO DELLA PAGINA */
 main{
-  background-color: grey;
-  height: 100vh;
-  padding: 100px 50px;
+  padding-top: 100px;
   overflow: auto;
-}
-main section{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -54,6 +53,9 @@ main .locandina{
   height: 500px;
   width: 342px;
   margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
 main .locandina .copertina{
@@ -61,16 +63,17 @@ main .locandina .copertina{
   width: 342px;
 }
 main .locandina .img-vuota{
-  width: 100px;
+  width: 200px;
   height: auto;
 }
 main .locandina:hover{
   cursor: pointer;
+  border: 2px solid white;
 }
 main .locandina:hover .copertina{
   transition: all .5s ease;
   opacity: 0.2;
-  filter: brightness(30%);
+  filter: brightness(50%);
 }
 main .locandina .info{
   display: none;

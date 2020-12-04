@@ -20,41 +20,35 @@
       </header>
 
       <main>
-        <!-- sezione films -->
-        <section class="films-serietv">
-
-          <div class="locandina" v-for="(item,i) in ricercaArray">
-            <img class="copertina" :src="copertinaArray[i]" @error="setAltImgCopertina" alt="">
-            <div class="info">
-              <div v-if="item.media_type=='movie'"> <!--titolo se film -->
-                <h3>Titolo: {{item.title}}</h3>
-                <h3>Titolo originale: {{item.original_title}}</h3>
-              </div>
-              <div v-else> <!--titolo se serie tv-->
-                <h3>Titolo: {{item.name}}</h3>
-                <h3>Titolo originale: {{item.original_name}}</h3>
-              </div>
-              <p>{{item.overview}}</p>  <!--trama-->
-              <div class="cast"> <!--cast-->
-                <h4>Cast:</h4>
-                <div v-for="attore in castArray[i]">
-                  {{attore}}
-                </div>
-              </div>
-              <div class="lingua">   <!--lingua del film espressa con la bandiera-->
-                <h3>Lingua:</h3>
-                <img class="bandierina" :src="bandieraArray[i]" @error="setAltImgBandiera" alt="">
-              </div>
-              <div class="voto">   <!--voto su base 5 espresso in stelline-->
-                <h3>Voto:</h3>
-                <i class="fas fa-star yellow-star" v-for="star in item.vote_average"></i>
-                <i class="fas fa-star" v-for="star in (5-item.vote_average)"></i>
+        <div class="locandina" v-for="(item,i) in ricercaArray">
+          <img class="copertina" :src="copertinaArray[i]" :class="copertinaArray[i]=='https://image.tmdb.org/t/p/w342/null'?imgVuota:''" @error="setAltImgCopertina" alt="">
+          <div class="info">
+            <div v-if="item.media_type=='movie'"> <!--titolo se film -->
+              <h3>Titolo: {{item.title}}</h3>
+              <h3>Titolo originale: {{item.original_title}}</h3>
+            </div>
+            <div v-else> <!--titolo se serie tv-->
+              <h3>Titolo: {{item.name}}</h3>
+              <h3>Titolo originale: {{item.original_name}}</h3>
+            </div>
+            <p>{{item.overview}}</p>  <!--trama-->
+            <div class="cast"> <!--cast-->
+              <h4>Cast:</h4>
+              <div v-for="attore in castArray[i]">
+                {{attore}}
               </div>
             </div>
+            <div class="lingua">   <!--lingua del film espressa con la bandiera-->
+              <h3>Lingua:</h3>
+              <img class="bandierina" :src="bandieraArray[i]" @error="setAltImgBandiera" alt="">
+            </div>
+            <div class="voto">   <!--voto su base 5 espresso in stelline-->
+              <h3>Voto:</h3>
+              <i class="fas fa-star yellow-star" v-for="star in item.vote_average"></i>
+              <i class="fas fa-star" v-for="star in (5-item.vote_average)"></i>
+            </div>
           </div>
-
-        </section>
-
+        </div>
       </main>
 
     </div>
