@@ -15,50 +15,40 @@
         <h1>BOOLFLIX</h1>
         <div class="input-search">
           <i class="fas fa-search icon-search"></i>
-          <input id="input" @keydown.enter="ricerca" v-model="search" type="search">
+          <input id="input" @keydown.enter="ricerca" v-model="search" type="search" placeholder="Cerca">
         </div>
       </header>
 
       <main>
         <!-- sezione films -->
-        <section class="films">
+        <section class="films-serietv">
 
-          <div class="locandina" v-for="(film,i) in filmsArray">
-            <img class="copertina" :src="copertinaFilmsArray[i]" @error="setAltImgCopertina" alt="">
+          <div class="locandina" v-for="(item,i) in ricercaArray">
+            <img class="copertina" :src="copertinaArray[i]" @error="setAltImgCopertina" alt="">
             <div class="info">
-              <h3>Titolo: {{film.title}}</h3>
-              <h3>Titolo originale: {{film.original_title}}</h3>
-              <p>{{film.overview}}</p>
-              <div class="lingua">
+              <div v-if="item.media_type=='movie'"> <!--titolo se film -->
+                <h3>Titolo: {{item.title}}</h3>
+                <h3>Titolo originale: {{item.original_title}}</h3>
+              </div>
+              <div v-else> <!--titolo se serie tv-->
+                <h3>Titolo: {{item.name}}</h3>
+                <h3>Titolo originale: {{item.original_name}}</h3>
+              </div>
+              <p>{{item.overview}}</p>  <!--trama-->
+              <div class="cast"> <!--cast-->
+                <h4>Cast:</h4>
+                <div v-for="attore in castArray[i]">
+                  {{attore}}
+                </div>
+              </div>
+              <div class="lingua">   <!--lingua del film espressa con la bandiera-->
                 <h3>Lingua:</h3>
-                <img class="bandierina" :src="bandieraFilmsArray[i]" @error="setAltImgBandiera" alt="">
+                <img class="bandierina" :src="bandieraArray[i]" @error="setAltImgBandiera" alt="">
               </div>
-              <div class="voto">
+              <div class="voto">   <!--voto su base 5 espresso in stelline-->
                 <h3>Voto:</h3>
-                <i class="fas fa-star yellow-star" v-for="star in film.vote_average"></i>
-                <i class="fas fa-star" v-for="star in (5-film.vote_average)"></i>
-              </div>
-            </div>
-          </div>
-
-        </section>
-
-        <!-- sezione serie tv -->
-        <section class="serie-tv">
-
-          <div class="locandina" v-for="(serieTv,i) in serieTvArray">
-            <img class="copertina" :src="copertinaSerieTvArray[i]" @error="setAltImgCopertina" alt="">
-            <div class="info">
-              <h3>Titolo: {{serieTv.original_name}}</h3>
-              <p>Titolo originale: {{serieTv.overview}}</p>
-              <div class="lingua">
-                <h3>Lingua:</h3>
-                <img class="bandierina" :src="bandieraSerieTvArray[i]" @error="setAltImgBandiera" alt="">
-              </div>
-              <div class="voto">
-                <h3>Voto:</h3>
-                <i class="fas fa-star yellow-star" v-for="star in serieTv.vote_average"></i>
-                <i class="fas fa-star star" v-for="star in (5-serieTv.vote_average)"></i>
+                <i class="fas fa-star yellow-star" v-for="star in item.vote_average"></i>
+                <i class="fas fa-star" v-for="star in (5-item.vote_average)"></i>
               </div>
             </div>
           </div>
