@@ -21,7 +21,7 @@
 
       <main>
         <div class="locandina" v-for="(item,i) in ricercaArray">
-          <img class="copertina" :src="copertinaArray[i]" :class="copertinaArray[i]=='https://image.tmdb.org/t/p/w342/null'?imgVuota:''" @error="setAltImgCopertina" alt="">
+          <img class="copertina" :src="copertinaArray[i]" alt="">
           <div class="info">
             <div v-if="item.media_type=='movie'"> <!--titolo se film -->
               <h3>Titolo: {{item.title}}</h3>

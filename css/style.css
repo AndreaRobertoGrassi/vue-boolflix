@@ -62,10 +62,6 @@ main .locandina .copertina{
   height: 500px;
   width: 342px;
 }
-main .locandina .img-vuota{
-  width: 200px;
-  height: auto;
-}
 main .locandina:hover{
   cursor: pointer;
   border: 2px solid white;

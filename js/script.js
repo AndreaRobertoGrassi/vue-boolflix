@@ -3,12 +3,10 @@ var app =new Vue({
   data:{
     apiKey:'8f23d254d7ec1835913633d0b0a45c83',
     search:'',  //input di ricerca
-    display:'block',
     ricercaArray:[],
     bandieraArray:[],
     copertinaArray:[],
-    castArray:[],
-    imgVuota:'img-vuota'
+    castArray:[]
   },
   mounted:function () {
     //focus automatico sull'input
@@ -26,6 +24,11 @@ var app =new Vue({
       //cerco i film
       axios.get('https://api.themoviedb.org/3/search/multi?api_key='+this.apiKey+'&language=it-IT&sort_by=popularity.desc&query='+this.search).then(response => {
         this.ricercaArray=response.data.results;
+        this.ricercaArray.forEach((item, i) => {   //elimino gli elementi senza copertina
+          if (item.poster_path==null) {
+            this.ricercaArray.splice(i,1);
+          }
+        });
         this.ricercaArray.forEach((item, i) => {
           //se film
           if (item.media_type=='movie') {
@@ -61,11 +64,6 @@ var app =new Vue({
           this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
         });
       });
-    },
-
-    // funzione per copertina non disponibile
-    setAltImgCopertina:function (event) {
-      event.target.src='img/img-vuota.svg';
     },
 
     //funzione per bandiera non europea
