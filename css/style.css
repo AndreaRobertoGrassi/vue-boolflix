@@ -38,6 +38,22 @@ header .icon-search{
   left: 15px;
   transform: translateY(-50%);
 }
+header .menu{
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  list-style: none;
+}
+header .linea{
+  display: none;
+}
+header .menu li:hover .linea{
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: red;
+}
 
 /* CORPO DELLA PAGINA */
 main{
@@ -85,14 +101,17 @@ main .locandina:hover .info{
   padding: 10px 15px;
 }
 main .info p{
-  margin: 20px 0;
-  max-height: 200px;
+  margin-top: 20px;
+  max-height: 169px;
   overflow: auto;
+}
+main .cast{
+  margin-top: 20px;
 }
 main .lingua{
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin:20px 0;
 }
 main .lingua .bandierina{
     width: 30px;

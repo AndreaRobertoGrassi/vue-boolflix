@@ -13,36 +13,39 @@
 
       <header>
         <h1>BOOLFLIX</h1>
+        <ul class="menu" v-if="displayCast==true">
+          <li>ALL <div class="linea"></div></li>
+          <li>MOVIE <div class="linea"></div></li>
+          <li>SERIE TV <div class="linea"></div></li>
+        </ul>
         <div class="input-search">
           <i class="fas fa-search icon-search"></i>
           <input id="input" @keydown.enter="ricerca" v-model="search" type="search" placeholder="Cerca">
         </div>
+
       </header>
 
       <main>
+        <!-- film e serie tv che si vedono tramite ricerca (al caricamento pagina si vedono i film popolari) -->
         <div class="locandina" v-for="(item,i) in ricercaArray">
           <img class="copertina" :src="copertinaArray[i]" alt="">
           <div class="info">
-            <div v-if="item.media_type=='movie'"> <!--titolo se film -->
-              <h3>Titolo: {{item.title}}</h3>
-              <h3>Titolo originale: {{item.original_title}}</h3>
+            <div>
+              <h3>Titolo: {{item.title}}{{item.name}}</h3>
+              <h3>Titolo originale: {{item.original_title}}{{item.original_name}}</h3>
             </div>
-            <div v-else> <!--titolo se serie tv-->
-              <h3>Titolo: {{item.name}}</h3>
-              <h3>Titolo originale: {{item.original_name}}</h3>
-            </div>
-            <p>{{item.overview}}</p>  <!--trama-->
-            <div class="cast"> <!--cast-->
-              <h4>Cast:</h4>
+            <p v-if="item.overview!=''">{{item.overview}}</p>
+            <div v-if="displayCast==true" class="cast">
+              <h3>Cast:</h3>
               <div v-for="attore in castArray[i]">
                 {{attore}}
               </div>
             </div>
-            <div class="lingua">   <!--lingua del film espressa con la bandiera-->
+            <div class="lingua">
               <h3>Lingua:</h3>
               <img class="bandierina" :src="bandieraArray[i]" @error="setAltImgBandiera" alt="">
             </div>
-            <div class="voto">   <!--voto su base 5 espresso in stelline-->
+            <div class="voto">
               <h3>Voto:</h3>
               <i class="fas fa-star yellow-star" v-for="star in item.vote_average"></i>
               <i class="fas fa-star" v-for="star in (5-item.vote_average)"></i>
@@ -52,7 +55,6 @@
       </main>
 
     </div>
-
 
     <!-- script -->
     <script src="js/script.js" charset="utf-8"></script>
