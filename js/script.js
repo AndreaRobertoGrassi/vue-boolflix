@@ -23,8 +23,8 @@ var app =new Vue({
           this.ricercaArray=[...this.popularArray,...response.data.results];
           this.ricercaArray.forEach((item, i) => {
             item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
-            this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
-            this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
+            Vue.set(this.copertinaArray,i,'https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
+            Vue.set(this.bandieraArray,i,'img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
           });
         });
       }
@@ -47,38 +47,38 @@ var app =new Vue({
         this.ricercaArray=response.data.results;
         this.ricercaArray.forEach((item, i) => {   //elimino gli elementi senza copertina
           if (item.poster_path==null) {
-            this.ricercaArray.splice(i,1);
+            Vue.delete(this.ricercaArray,i);
           }
         });
         this.ricercaArray.forEach((item, i) => {
           //se film
           if (item.media_type=='movie') {
             axios.get('https://api.themoviedb.org/3/movie/'+item.id+'/credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
-              this.inserimentoCast(response);
+              this.inserimentoCast(response,i);
             });
           }else { //se serie tv
             axios.get('https://api.themoviedb.org/3/tv/'+item.id+'/credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
-              this.inserimentoCast(response);
+              this.inserimentoCast(response,i);
             });
           }
           item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
-          this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
-          this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
+          Vue.set(this.copertinaArray,i,'https://image.tmdb.org/t/p/w342/'+item.poster_path);    //inserisco l'immagine di copertina
+          Vue.set(this.bandieraArray,i,'img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
         });
       });
     },
 
     //funzione per inserie il cast
-    inserimentoCast:function (response) {
+    inserimentoCast:function (response,i) {
       if (response.data.cast.length>2) {
         let nuovoCast={
           attoriUno:response.data.cast[0].original_name,
           attoriDue:response.data.cast[1].original_name,
           attoreTre:response.data.cast[2].original_name
         }
-        this.castArray.push(nuovoCast);
+        Vue.set(this.castArray,i,nuovoCast);
       }else {
-        this.castArray.push({nessuno:'Non disponibile'})
+        Vue.set(this.castArray,i,{nessuno:'Non disponibile'});
       }
     },
 
