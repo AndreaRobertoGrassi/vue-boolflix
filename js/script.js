@@ -8,25 +8,28 @@ var app =new Vue({
     copertinaArray:[],
     castArray:[],
     popularArray:[],
-    displayCast:false   // rende invisibile la parola cast al caricamento della pagina per film popolari
+    displayCast:false  // rende invisibile la parola cast al caricamento della pagina per film popolari
   },
 
   mounted:function () {
     //focus automatico sull'input
     document.getElementById('input').focus();
 
-    // al caricamento inserisco in oagina i film piu popolari
+    // al caricamento inserisco in oagina i film/serie tv piu popolari
     axios.get('https://api.themoviedb.org/3/discover/movie?api_key='+this.apiKey+'&language=it-IT&sort_by=popularity.desc').then(response =>{
       this.popularArray=response.data.results;
-      axios.get('https://api.themoviedb.org/3/discover/tv?api_key='+this.apiKey+'&language=it-IT&sort_by=popularity.desc').then(response =>{
-        this.ricercaArray=[...this.popularArray,...response.data.results];
-        this.ricercaArray.forEach((item, i) => {
-          item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
-          this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
-          this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
+      if (this.popularArray.length==20) {
+        axios.get('https://api.themoviedb.org/3/discover/tv?api_key='+this.apiKey+'&language=it-IT&sort_by=popularity.desc').then(response =>{
+          this.ricercaArray=[...this.popularArray,...response.data.results];
+          this.ricercaArray.forEach((item, i) => {
+            item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
+            this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
+            this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
+          });
         });
-      });
+      }
     });
+
   },
 
   methods:{
@@ -58,7 +61,6 @@ var app =new Vue({
               this.inserimentoCast(response);
             });
           }
-
           item.vote_average=Math.ceil(item.vote_average/2);    //trasformo il voto in base 10, in base 5
           this.copertinaArray.push('https://image.tmdb.org/t/p/w342/'+item.poster_path);  //inserisco l'immagine di copertina
           this.bandieraArray.push('img/'+item.original_language+'.svg');   //inserisco la bandiera in base alla lingua
@@ -66,8 +68,9 @@ var app =new Vue({
       });
     },
 
+    //funzione per inserie il cast
     inserimentoCast:function (response) {
-      if (response.data.cast.length>0) {
+      if (response.data.cast.length>2) {
         let nuovoCast={
           attoriUno:response.data.cast[0].original_name,
           attoriDue:response.data.cast[1].original_name,
