@@ -6,6 +6,7 @@
 body{
   background-color: #252525;
 }
+
 /* INTESTAZIONE */
 header{
   width: 100%;
@@ -41,18 +42,18 @@ header .icon-search{
 header .menu{
   width: 200px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   color: white;
   list-style: none;
 }
-header .linea{
-  display: none;
+header .menu li{
+  padding-bottom: 2px;
+  border-bottom: 1px solid #171515;
 }
-header .menu li:hover .linea{
-  display: block;
-  width: 100%;
-  height: 1px;
-  background-color: red;
+header .menu li:hover{
+  cursor: pointer;
+  border-bottom: 2px solid red;
 }
 
 /* CORPO DELLA PAGINA */
@@ -127,4 +128,10 @@ main .voto h3{
 }
 main .voto .yellow-star{
   color: #ffbf00;
+}
+.block{
+  display: block;
+}
+.none{
+  display: none;
 }

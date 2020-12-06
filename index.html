@@ -14,9 +14,7 @@
       <header>
         <h1>BOOLFLIX</h1>
         <ul class="menu" v-if="displayCast==true">
-          <li>ALL <div class="linea"></div></li>
-          <li>MOVIE <div class="linea"></div></li>
-          <li>SERIE TV <div class="linea"></div></li>
+          <li v-for="(filtro,i) in filtroArray" @click="filtrare(i)">{{filtro}}</li>
         </ul>
         <div class="input-search">
           <i class="fas fa-search icon-search"></i>
@@ -31,8 +29,8 @@
           <img class="copertina" :src="copertinaArray[i]" alt="">
           <div class="info">
             <div>
-              <h3>Titolo: {{item.title}}{{item.name}}</h3>
-              <h3>Titolo originale: {{item.original_title}}{{item.original_name}}</h3>
+              <h3>Titolo: {{item.title}} {{item.name}}</h3>
+              <h3>Titolo originale: {{item.original_title}} {{item.original_name}}</h3>
             </div>
             <p v-if="item.overview!=''">{{item.overview}}</p>
             <div v-if="displayCast==true" class="cast">

@@ -3,12 +3,14 @@ var app =new Vue({
   data:{
     apiKey:'8f23d254d7ec1835913633d0b0a45c83',
     search:'',  //input di ricerca
+    filtroArray:['ALL','MOVIE','SERIE TV'],
     ricercaArray:[],
     bandieraArray:[],
     copertinaArray:[],
     castArray:[],
     popularArray:[],
-    displayCast:false  // rende invisibile la parola cast al caricamento della pagina per film popolari
+    displayCast:false,  // rende invisibile la parola cast al caricamento della pagina per film popolari
+    displayFiltro:''
   },
 
   mounted:function () {
@@ -45,18 +47,20 @@ var app =new Vue({
       //cerco i film/serie tv
       axios.get('https://api.themoviedb.org/3/search/multi?api_key='+this.apiKey+'&language=it-IT&sort_by=popularity.desc&query='+this.search).then(response => {
         this.ricercaArray=response.data.results;
+
         this.ricercaArray.forEach((item, i) => {   //elimino gli elementi senza copertina
           if (item.poster_path==null) {
             Vue.delete(this.ricercaArray,i);
           }
         });
+
         this.ricercaArray.forEach((item, i) => {
           //se film
           if (item.media_type=='movie') {
             axios.get('https://api.themoviedb.org/3/movie/'+item.id+'/credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
               this.inserimentoCast(response,i);
             });
-          }else { //se serie tv
+          }else if(item.media_type=='tv') { //se serie tv
             axios.get('https://api.themoviedb.org/3/tv/'+item.id+'/credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
               this.inserimentoCast(response,i);
             });
@@ -79,6 +83,28 @@ var app =new Vue({
         Vue.set(this.castArray,i,nuovoCast);
       }else {
         Vue.set(this.castArray,i,{nessuno:'Non disponibile'});
+      }
+    },
+
+    //funzione per filtrare
+    filtrare:function (i) {
+      this.displayFiltro='';
+      if (i==1) {
+        this.ricercaArray.forEach(item => {
+          if (item.media_type=='movie') {
+            this.displayFiltro='block';
+          }else {
+            this.displayFiltro='none';
+          }
+        });
+      }else if (i==2) {
+        this.ricercaArray.forEach(item => {
+          if (item.media_type=='movie') {
+            this.displayFiltro='block';
+          }else {
+            this.displayFiltro='none';
+          }
+        });
       }
     },
 
