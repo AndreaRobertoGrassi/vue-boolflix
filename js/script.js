@@ -55,16 +55,15 @@ var app =new Vue({
             if (i==0) {
               this.idAttore=item.id;
             }
-            if (this.idAttore!=undefined && item.media_type=='person') {  //inserisco l'id della ricerca nell'api
-              axios.get('https://api.themoviedb.org/3/person/'+this.idAttore+'/combined_credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
-                this.attoriArray=response.data.cast;
-                this.attoriArray.forEach((el, i) => {
-                  el.vote_average=Math.ceil(el.vote_average/2);    //trasformo il voto in base 10, in base 5
-                  Vue.set(this.copertinaArray,i,'https://image.tmdb.org/t/p/w342/'+el.poster_path);    //inserisco l'immagine di copertina
-                  Vue.set(this.bandieraArray,i,'img/'+el.original_language+'.svg');   //inserisco la bandiera in base alla lingua
-                });
+            //inserisco l'id della ricerca nell'api
+            axios.get('https://api.themoviedb.org/3/person/'+this.idAttore+'/combined_credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
+              this.attoriArray=response.data.cast;
+              this.attoriArray.forEach((el, i) => {
+                el.vote_average=Math.ceil(el.vote_average/2);    //trasformo il voto in base 10, in base 5
+                Vue.set(this.copertinaArray,i,'https://image.tmdb.org/t/p/w342/'+el.poster_path);    //inserisco l'immagine di copertina
+                Vue.set(this.bandieraArray,i,'img/'+el.original_language+'.svg');   //inserisco la bandiera in base alla lingua
               });
-            }
+            });
           }else if (item.media_type=='movie') {   //se film
             axios.get('https://api.themoviedb.org/3/movie/'+item.id+'/credits?api_key='+this.apiKey+'&language=it-IT').then(response => {
               this.inserimentoCast(response,i);
