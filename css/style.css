@@ -39,22 +39,7 @@ header .icon-search{
   left: 15px;
   transform: translateY(-50%);
 }
-header .menu{
-  width: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: white;
-  list-style: none;
-}
-header .menu li{
-  padding-bottom: 2px;
-  border-bottom: 1px solid #171515;
-}
-header .menu li:hover{
-  cursor: pointer;
-  border-bottom: 2px solid red;
-}
+
 
 /* CORPO DELLA PAGINA */
 main{

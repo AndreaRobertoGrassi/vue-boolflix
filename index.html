@@ -13,9 +13,6 @@
 
       <header>
         <h1>BOOLFLIX</h1>
-        <ul class="menu" v-if="displayCast==true">
-          <li v-for="(filtro,i) in filtroArray" @click="filtrare(i)">{{filtro}}</li>
-        </ul>
         <div class="input-search">
           <i class="fas fa-search icon-search"></i>
           <input id="input" @keydown.enter="ricerca" v-model="search" type="search" placeholder="Cerca">
@@ -26,7 +23,7 @@
       <main>
 
         <!-- film e serie tv cercati (al caricamento pagina si vedono i film popolari) -->
-        <div class="locandina" v-for="(item,i) in filmSerieArray">
+        <div v-if="item.media_type!='person' && (item.poster_path!=null || item.poster_path!= undefined)" class="locandina" v-for="(item,i) in filmSerieArray">
 
           <img class="copertina" :src="copertinaArray[i]" alt="">
           <div class="info">
@@ -55,7 +52,7 @@
         </div>
 
         <!-- film e serie tv dell'attore cercato -->
-        <div class="locandina" v-for="(item, i) in attoriArray">
+        <div v-if="item.poster_path!=null || item.poster_path!= undefined" class="locandina" v-for="(item, i) in attoriArray">
           <img class="copertina" :src="copertinaArray[i]" alt="">
           <div class="info">
             <div>
